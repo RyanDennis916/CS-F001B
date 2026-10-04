@@ -179,3 +179,72 @@ class Hand {
         return new Card(myCards[k]);
     }
 }
+
+/* ---------- Phase 1 Run (FoothillPhase1) ----------
+A of spades
+** illegal **
+J of clubs
+** illegal **
+Q of spades
+J of clubs
+
+---------- Phase 2 Run (Foothill) ----------
+Hand full
+After deal
+Hand = ( 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs )
+Testing inspectCard()
+9 of hearts
+** illegal **
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+Playing 9 of hearts
+Playing T of clubs
+Playing 3 of clubs
+After playing all cards
+Hand = ( )
+*/
