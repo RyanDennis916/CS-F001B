@@ -20,10 +20,10 @@ public class Foothill {
         System.out.println(hand.inspectCard(-1));
 
         while (hand.getNumCards() > 0) {
-            System.out.println("Playing " + hand.playCard());
+            System.out.println("playing " + hand.playCard());
         }
 
-        System.out.println("After playing all cards");
+        System.out.println("After all cards");
         System.out.println(hand);
     }
 }
@@ -177,10 +177,10 @@ class Hand {
             return new Card('?', Card.Suit.spades);
         }
         return new Card(myCards[k]);
-    }
+}
 }
 
-/*Phase 1 Run (FoothillPhase1)
+ /*---Phase 1--
 A of spades
 ** illegal **
 J of clubs
@@ -188,63 +188,63 @@ J of clubs
 Q of spades
 J of clubs
 
-Phase 2 Run (Foothill)
+---Phase 2--
 Hand full
 After deal
 Hand = ( 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs )
 Testing inspectCard()
 9 of hearts
 ** illegal **
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-Playing 9 of hearts
-Playing T of clubs
-Playing 3 of clubs
-After playing all cards
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+playing 9 of hearts
+playing T of clubs
+playing 3 of clubs
+After all cards
 Hand = ( )
 */
