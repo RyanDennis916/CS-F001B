@@ -180,7 +180,7 @@ class Hand {
     }
 }
 
-/* ---------- Phase 1 Run (FoothillPhase1) ----------
+/*Phase 1 Run (FoothillPhase1)
 A of spades
 ** illegal **
 J of clubs
@@ -188,7 +188,7 @@ J of clubs
 Q of spades
 J of clubs
 
----------- Phase 2 Run (Foothill) ----------
+Phase 2 Run (Foothill)
 Hand full
 After deal
 Hand = ( 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs, 9 of hearts, 3 of clubs, T of clubs )
