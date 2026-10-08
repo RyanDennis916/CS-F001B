@@ -1,30 +1,20 @@
 public class Foothill {
     public static void main(String[] args) {
-        Card[] deal = {
-            new Card('3', Card.Suit.clubs),
-            new Card('T', Card.Suit.clubs),
-            new Card('9', Card.Suit.hearts)
-        };
-        Hand hand = new Hand();
-        int next = 0;
+        Deck deck = new Deck(2);
 
-        while (hand.takeCard(deal[next])) {
-            next = (next + 1) % deal.length;
+        for (int i=deck.getNumCards(); i>0; i--) {
+            System.out.print(deck.dealCard() + " /  ");
+            System.out.println();
         }
+        
+        deck.init(2);
+        deck.shuffle();
 
-        System.out.println("Hand full");
-        System.out.println("After deal");
-        System.out.println(hand);
-        System.out.println("Testing inspectCard()");
-        System.out.println(hand.inspectCard(2));
-        System.out.println(hand.inspectCard(-1));
-
-        while (hand.getNumCards() > 0) {
-            System.out.println("playing " + hand.playCard());
+        for (int j=deck.getNumCards(); j>0; j--) {
+            System.out.print(deck.dealCard() + " /  ");
+            System.out.println();
         }
-
-        System.out.println("After all cards");
-        System.out.println(hand);
+       
     }
 }
 
@@ -49,38 +39,41 @@ class FoothillPhase1 {
 }
 
 class Card implements CardInterface {
-    private static final char DEFAULT_VALUE = 'A';
-    private static final Suit DEFAULT_SUIT = Suit.spades;
+    
 
-    private char value;
+    private char rank;
     private Suit suit;
     private boolean errorFlag;
 
     public Card() {
-        set(DEFAULT_VALUE, DEFAULT_SUIT);
+        set(DEFAULT_RANK, DEFAULT_SUIT);
     }
 
-    public Card(char value, Suit suit) {
-        set(value, suit);
+    public Card(char rank, Suit suit) {
+        set(rank, suit);
     }
 
     public Card(Card card) {
-        set(card.getValue(), card.getSuit());
+        set(card.getRank(), card.getSuit());
     }
 
-    public Card(char value) {
-        set(value, DEFAULT_SUIT);
+    public Card(char rank) {
+        set(rank, Card.DEFAULT_SUIT);
     }
 
-    public boolean set(char value, Suit suit) {
-        this.value = value;
+    public Card(Suit suit) {
+        set(Card.DEFAULT_RANK, suit);
+    }
+
+    public boolean set(char rank, Suit suit) {
+        this.rank = rank;
         this.suit = suit;
-        errorFlag = !isValid(value, suit);
+        errorFlag = !isValid(rank, suit);
         return !errorFlag;
     }
 
-    public char getValue() {
-        return value;
+    public char getRank() {
+        return rank;
     }
 
     public Suit getSuit() {
@@ -93,7 +86,7 @@ class Card implements CardInterface {
 
     public boolean equals(Card card) {
         return card != null
-                && value == card.value
+                && rank == card.rank
                 && suit == card.suit
                 && errorFlag == card.errorFlag;
     }
@@ -102,12 +95,12 @@ class Card implements CardInterface {
         if (errorFlag) {
             return "** illegal **";
         }
-        return value + " of " + suit;
+        return rank + " of " + suit;
     }
 
-    private static boolean isValid(char value, Suit suit) {
-        for (char allowedValue : CardInterface.CARD_VALUES) {
-            if (value == allowedValue) {
+    private static boolean isValid(char rank, Suit suit) {
+        for (char allowedRank : CardInterface.RANKS) {
+            if (rank == allowedRank) {
                 return true;
             }
         }
@@ -178,6 +171,94 @@ class Hand {
         }
         return new Card(myCards[k]);
 }
+}
+
+class Deck {
+    private static final int MAX_PACKS = 6;
+    private static final int NUM_CARDS_PER_PACK = Card.NUM_RANKS * Card.NUM_SUITS;
+    private static final int MAX_CARDS_PER_DECK = MAX_PACKS * NUM_CARDS_PER_PACK;
+
+    private static Card[] packTemplate;
+
+    private Card[] cards;
+    private int topCard;
+
+    public Deck() {
+        this(1);
+    }
+
+    public Deck(int numPacks) {
+        allocatePackTemplate();
+        cards = new Card[MAX_CARDS_PER_DECK];
+        if (!init(numPacks)) {
+            init();
+        }
+    }
+
+    private static void allocatePackTemplate() {
+        if (packTemplate != null) {
+            return;
+        }
+        packTemplate = new Card[NUM_CARDS_PER_PACK];
+        int index = 0;
+        for (Card.Suit suit : Card.Suit.values()) {
+            for (char rank : Card.RANKS) {
+                packTemplate[index] = new Card(rank, suit);
+                index++;
+            }
+        }
+    }
+
+    public void init() {
+        init(1);
+    }
+
+    public boolean init(int numPacks) {
+        if (numPacks < 1 || numPacks > MAX_PACKS) {
+            return false;
+        }
+        topCard = 0;
+        for (int pack = 0; pack < numPacks; pack++) {
+            for (int i = 0; i < NUM_CARDS_PER_PACK; i++) {
+                cards[topCard] = new Card(packTemplate[i]);
+                topCard++;
+            }
+        }
+        for (int i = topCard; i < MAX_CARDS_PER_DECK; i++) {
+            cards[i] = null;
+        }
+        return true;
+    }
+
+    public void shuffle() {
+        for (int i = topCard - 1; i > 0; i--) {
+            int j = (int) (Math.random() * (i + 1));
+            Card temp = cards[i];
+            cards[i] = cards[j];
+            cards[j] = temp;
+        }
+    }
+
+    public Card dealCard() {
+        if (topCard == 0) {
+            return new Card('?', Card.Suit.spades);
+        }
+        topCard--;
+        Card dealt = cards[topCard];
+        cards[topCard] = null;
+        return dealt;
+    }
+
+    public int getNumCards() {
+        return topCard;
+    }
+
+    public Card inspectCard(int k) {
+        if (k < 0 || k >= topCard) {
+            return new Card('?', Card.Suit.spades);
+        }
+        return new Card(cards[k]);
+    }
 }
 
  /*---Phase 1--
