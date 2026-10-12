@@ -1,11 +1,16 @@
 import java.util.Scanner;
 
 /**
- * 
+ * One object of this class represents a driver program that deals a deck of cards into a number of hands chosen by the user
+ * The program builds a deck sized to the number of hands then calls the hand dealing method once on the unshuffled deck and again after shuffling so the two outcomes can be compared
+ *
  * @author Ryan Dennis
  * @author Atharv Dua
  */
 public class Foothill {
+    /**
+     * prompts the user for the number of hands to deal then prints those hands dealt from the deck before and after it is shuffled
+     */
     public static void main(String[] args) {
 //        Deck deck = new Deck(2);
 //
@@ -47,12 +52,12 @@ public class Foothill {
     }
     
     /**
-     * deals cards from deck into new hands and prints each hand
-	 *
-	 * @param numPlayers number of hands to create
-	 * @param numCards one less than the intended number of cards per hand
-	 * @param deck deck supplying the cards
-	 * @param hands array that receives the created hands (needs space for numPlayers hands)
+     * deals cards from the deck into new hands and prints each hand as it is filled
+     *
+     * @param numPlayers number of hands to create
+     * @param numCards one less than the intended number of cards per hand
+     * @param deck deck supplying the cards
+     * @param hands array that receives the created hands (needs space for numPlayers hands)
      */
     public static void printHands(int numPlayers, int numCards, Deck deck, Hand[] hands) {
     	for (int i= 0; i< numPlayers; i++) {
@@ -67,14 +72,16 @@ public class Foothill {
     }
 }
 /**
- * Demonstrates card creation and modification
- * Examples below have both valid and invalid card values to show
- * card validation and display behaviour
+ * One object of this class represents a demonstration program that creates and modifies cards
+ * The examples below construct cards with both valid and invalid values then print and update them to show the resulting validation and display behavior
  *
  * @author Ryan Dennis
  * @author Atharv Dua
  */
 class FoothillPhase1 {
+    /**
+     * creates several cards with valid and invalid values then prints and modifies them to show validation and display behavior
+     */
     public static void main(String[] args) {
         Card first = new Card();
         Card second = new Card('?', Card.Suit.hearts);
@@ -94,33 +101,71 @@ class FoothillPhase1 {
     }
 }
 
+/**
+ * One object of this class represents a single playing card having a rank and a suit
+ * A card is created through one of the constructors or copied from an existing card then its rank and suit can be read with the getter methods or replaced with the set method which also determines whether the card is valid for use by equals and toString
+ *
+ * @author Ryan Dennis
+ * @author Atharv Dua
+ */
 class Card implements CardInterface {
-    
+
 
     private char rank;
     private Suit suit;
     private boolean errorFlag;
 
+    /**
+     * constructs a card with the default rank and suit
+     */
     public Card() {
         set(DEFAULT_RANK, DEFAULT_SUIT);
     }
 
+    /**
+     * constructs a card with the given rank and suit
+     *
+     * @param rank the rank for the new card
+     * @param suit the suit for the new card
+     */
     public Card(char rank, Suit suit) {
         set(rank, suit);
     }
 
+    /**
+     * constructs a card that is a copy of the given card
+     *
+     * @param card the card to copy
+     */
     public Card(Card card) {
         set(card.getRank(), card.getSuit());
     }
 
+    /**
+     * constructs a card with the given rank and the default suit
+     *
+     * @param rank the rank for the new card
+     */
     public Card(char rank) {
         set(rank, Card.DEFAULT_SUIT);
     }
 
+    /**
+     * constructs a card with the default rank and the given suit
+     *
+     * @param suit the suit for the new card
+     */
     public Card(Suit suit) {
         set(Card.DEFAULT_RANK, suit);
     }
 
+    /**
+     * sets the rank and suit of the card and returns true if the values that were just set were valid, false otherwise
+     *
+     * @param rank the rank value being set to the card
+     * @param suit the suit value being set to the card
+     * @return true if the values that were just set were valid, false otherwise
+     */
     public boolean set(char rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
@@ -128,18 +173,31 @@ class Card implements CardInterface {
         return !errorFlag;
     }
 
+    /**
+     * @return the card's current rank
+     */
     public char getRank() {
         return rank;
     }
 
+    /**
+     * @return the card's current suit
+     */
     public Suit getSuit() {
         return suit;
     }
 
+    /**
+     * @return true if the card has any invalid internal property values, false otherwise
+     */
     public boolean isErrorFlag() {
         return errorFlag;
     }
 
+    /**
+     * @param card a card object
+     * @return true if the card objects have the same internal property values, false otherwise
+     */
     public boolean equals(Card card) {
         return card != null
                 && rank == card.rank
@@ -147,6 +205,9 @@ class Card implements CardInterface {
                 && errorFlag == card.errorFlag;
     }
 
+    /**
+     * @return a non-null string representation of the card object
+     */
     public String toString() {
         if (errorFlag) {
             return "** illegal **";
@@ -164,17 +225,30 @@ class Card implements CardInterface {
     }
 }
 
+/**
+ * One object of this class represents a hand of playing cards held by a player
+ * Cards are added one at a time with the take method and removed one at a time with the play method while the inspect method and the string conversion let the current contents be examined without changing the hand
+ *
+ * @author Ryan Dennis
+ * @author Atharv Dua
+ */
 class Hand {
     public static final int MAX_CARDS = 50;
 
     private Card[] myCards;
     private int numCards;
 
+    /**
+     * constructs an empty hand with room for the maximum number of cards
+     */
     public Hand() {
         myCards = new Card[MAX_CARDS];
         resetHand();
     }
 
+    /**
+     * removes all cards from the hand leaving it empty
+     */
     public void resetHand() {
         for (int i = 0; i < numCards; i++) {
             myCards[i] = null;
@@ -182,6 +256,12 @@ class Hand {
         numCards = 0;
     }
 
+    /**
+     * adds a copy of the given card to the hand if the hand is not already full and the card is valid
+     *
+     * @param card the card to add to the hand
+     * @return true unless the hand was already full
+     */
     public boolean takeCard(Card card) {
         if (numCards == MAX_CARDS) {
             return false;
@@ -193,6 +273,11 @@ class Hand {
         return true;
     }
 
+    /**
+     * removes and returns the most recently taken card from the hand
+     *
+     * @return the removed card or an invalid card if the hand was empty
+     */
     public Card playCard() {
         if (numCards == 0) {
             return new Card('?', Card.Suit.spades);
@@ -203,6 +288,9 @@ class Hand {
         return played;
     }
 
+    /**
+     * @return a non-null string representation of the hand and its cards
+     */
     public String toString() {
         if (numCards == 0) {
             return "Hand = ( )";
@@ -217,10 +305,17 @@ class Hand {
         return text.append(" )").toString();
     }
 
+    /**
+     * @return the number of cards currently in the hand
+     */
     public int getNumCards() {
         return numCards;
     }
 
+    /**
+     * @param k the position of the card to inspect
+     * @return a copy of the card at the given position or an invalid card if the position is out of bounds
+     */
     public Card inspectCard(int k) {
         if (k < 0 || k >= numCards) {
             return new Card('?', Card.Suit.spades);
@@ -230,10 +325,9 @@ class Hand {
 }
 
 /**
- * One object of this class represents a deck (which can have 1 or more packs of playing cards)
- * One can initialize to prepare a complete deck, or shuffle to change the order
- * or deal to transfer cards to the hands or inspect, to examine
- * remaining cards to be examined without dealing them
+ * One object of this class represents a deck which can hold one or more packs of playing cards
+ * A deck is built or reset to a full pack order with the init methods then shuffle changes that order while deal transfers the top card to a caller and inspect allows a card to be examined without removing it
+ *
  * @author Atharv Dua
  * @author Ryan Dennis
  */
@@ -247,11 +341,19 @@ class Deck {
     private Card[] cards;
     private int topCard;
 
-    
+
+    /**
+     * constructs a deck containing a single pack of cards
+     */
     public Deck() {
         this(1);
     }
 
+    /**
+     * constructs a deck containing the given number of packs falling back to a single pack if the number given is not supported
+     *
+     * @param numPacks the number of packs to include in the deck
+     */
     public Deck(int numPacks) {
         allocatePackTemplate();
         cards = new Card[MAX_CARDS_PER_DECK];
@@ -274,10 +376,19 @@ class Deck {
         }
     }
 
+    /**
+     * resets the deck to a single full pack of cards in pack order
+     */
     public void init() {
         init(1);
     }
 
+    /**
+     * resets the deck to the given number of packs in pack order
+     *
+     * @param numPacks the number of packs to include in the deck
+     * @return true if the number of packs was supported, false otherwise
+     */
     public boolean init(int numPacks) {
         if (numPacks < 1 || numPacks > MAX_PACKS) {
             return false;
@@ -307,10 +418,11 @@ class Deck {
         }
     }
     
-    /*
-     * 
+    /**
+     * removes and returns the top card of the deck
+     *
+     * @return the removed card or an invalid card if the deck was empty
      */
-
     public Card dealCard() {
         if (topCard == 0) {
             return new Card('?', Card.Suit.spades);
@@ -321,17 +433,17 @@ class Deck {
         return dealt;
     }
 
+    /**
+     * @return the number of cards remaining in the deck
+     */
     public int getNumCards() {
         return topCard;
     }
-    
-    /*
-     * returns a copy of a card but without removing it from deck
-	 *
-	 * @param k position of card to inspect
-	 * @return copy of the selected card (or invalid card if selection is out of bounds)
-     */
 
+    /**
+     * @param k the position of the card to inspect
+     * @return a copy of the selected card or an invalid card if the position is out of bounds
+     */
     public Card inspectCard(int k) {
         if (k < 0 || k >= topCard) {
             return new Card('?', Card.Suit.spades);

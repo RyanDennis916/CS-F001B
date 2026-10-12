@@ -19,6 +19,7 @@ import mockit.Deencapsulation;
  */
 public class CardTest {
 
+
 	private static final CardInterface.Suit DEFAULT_SUIT = CardInterface.Suit.spades;
 	private static final char DEFAULT_RANK = 'A';
 	// @Generated(value = "org.junit-tools-1.0.6")
